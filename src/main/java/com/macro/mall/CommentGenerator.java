@@ -72,28 +72,28 @@ public class CommentGenerator extends DefaultCommentGenerator {
         field.addJavaDocLine(" */");
     }
 
-    @Override
-    public void addJavaFileComment(CompilationUnit compilationUnit) {
-        super.addJavaFileComment(compilationUnit);
-        //只在model中添加swagger注解类的导入
-        if(!compilationUnit.isJavaInterface()&&!compilationUnit.getType().getFullyQualifiedName().contains(EXAMPLE_SUFFIX)){
-            compilationUnit.addImportedType(new FullyQualifiedJavaType(API_MODEL_PROPERTY_FULL_CLASS_NAME));
-            compilationUnit.addImportedType(new FullyQualifiedJavaType("javax.persistence.*"));
-            compilationUnit.addImportedType(new FullyQualifiedJavaType("org.springframework.format.annotation.DateTimeFormat"));
-            compilationUnit.addImportedType(new FullyQualifiedJavaType("lombok.Data"));
-            compilationUnit.addImportedType(new FullyQualifiedJavaType("io.swagger.annotations.ApiModel"));
-        }
-    }
-
-    public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        if (!this.suppressAllComments && this.addRemarkComments) {
-            topLevelClass.addJavaDocLine("@ApiModel(\""+introspectedTable.getTableConfiguration().getTableName() +"\")");
-            topLevelClass.addJavaDocLine("@Entity(name = \""+introspectedTable.getTableConfiguration().getTableName() +"\")");
-
-            topLevelClass.addJavaDocLine("@Data");
-
-        }
-    }
+//    @Override
+//    public void addJavaFileComment(CompilationUnit compilationUnit) {
+//        super.addJavaFileComment(compilationUnit);
+//        //只在model中添加swagger注解类的导入
+//        if(!compilationUnit.isJavaInterface()&&!compilationUnit.getType().getFullyQualifiedName().contains(EXAMPLE_SUFFIX)){
+//            compilationUnit.addImportedType(new FullyQualifiedJavaType(API_MODEL_PROPERTY_FULL_CLASS_NAME));
+//            compilationUnit.addImportedType(new FullyQualifiedJavaType("javax.persistence.*"));
+//            compilationUnit.addImportedType(new FullyQualifiedJavaType("org.springframework.format.annotation.DateTimeFormat"));
+//            compilationUnit.addImportedType(new FullyQualifiedJavaType("lombok.Data"));
+//            compilationUnit.addImportedType(new FullyQualifiedJavaType("io.swagger.annotations.ApiModel"));
+//        }
+//    }
+//
+//    public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+//        if (!this.suppressAllComments && this.addRemarkComments) {
+//            topLevelClass.addJavaDocLine("@ApiModel(\""+introspectedTable.getTableConfiguration().getTableName() +"\")");
+//            topLevelClass.addJavaDocLine("@Entity(name = \""+introspectedTable.getTableConfiguration().getTableName() +"\")");
+//
+//            topLevelClass.addJavaDocLine("@Data");
+//
+//        }
+//    }
 
 
 }
